@@ -1,0 +1,41 @@
+version: '3'
+services:
+
+  geo-balancer:
+    image: anroe/nginx-geoip2
+    volumes:
+      - ./config/geobalancer/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/geobalancer/GeoLite2-Country.mmdb:/usr/share/nginx/GeoLite2-Country.mmdb
+    ports:
+      - '80:80'
+
+  uae-app:
+    image: nginx
+    volumes:
+      - ./config/uae/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - '81:81'
+  ca-app-1:
+    image: nginx
+    volumes:
+      - ./config/ca1/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - '82:82'
+  ca-app-2:
+    image: nginx
+    volumes:
+      - ./config/ca2/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - '83:83'
+  general-app:
+    image: nginx
+    volumes:
+      - ./config/general/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - '84:84'
+  backup-app:
+    image: nginx
+    volumes:
+      - ./config/backup/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - '85:85'
